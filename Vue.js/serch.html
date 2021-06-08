@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/tabu.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <input v-model="findWord">
+            <li v-for="item in findNames">{{item}}</li>
+        </ul>   
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                findWord:'',
+                items:['鈴木','佐藤','山田','田中']
+            },
+            computed:{
+                //this.findWordが変わったら、その文字が含まれるリストを算出する
+                findNames:function(){
+                    if(this.findWord){
+                        return this.items.filter(function(value){
+                            return(value.indexOf(this.findWord)>-1);
+                        },this);
+                    }else{
+                        //this.findWordが空のときあ、リストをそのまま返す
+                        return this.items;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

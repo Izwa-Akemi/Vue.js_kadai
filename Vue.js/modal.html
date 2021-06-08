@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vueモーダル </title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/modal.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <main>
+      <!-- ① モーダル表示ボタン -->
+      <button v-on:click="showModal" class="p-btn">Let's Click</button>
+    
+      <!-- ② モーダル -->
+      <div v-if="modalVisible" class="l-modal" v-on:click="closeModal">
+        <div class="p-modal" v-on:click="cancelEvent">
+          <h2 class="p-modal__title">モーダルウィンドウ開いたぜ</h2> 
+          <p>ご確認よろしくお願いいたします。</p> 
+    
+          <!-- モーダルを閉じるボタン -->
+          <div v-on:click="closeModal" class="p-modal__btn--close"><button>閉じるぜ</button></div>
+       </div> 
+      </div> 
+    
+      <!-- ③ モーダル表示時の背景色（薄い黒） -->
+      <div v-if="modalBgVisible" class="l-modal__bg"></div>
+    </main>
+    </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        modalVisible: false, // モーダル
+        modalBgVisible: false //モーダル背景色（薄黒）
+      },
+      methods: {
+        showModal: function(){
+          　this.modalVisible = true
+　　　　　　 this.modalBgVisible = true
+        },
+        closeModal: function(){
+          　this.modalVisible = false
+　　　　　　 this.modalBgVisible = false
+        },
+        cancelEvent:function(){
+           event.stopPropagation() 
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
